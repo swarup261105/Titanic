@@ -106,3 +106,37 @@ for col in nominal_cols:
 dissimilarity = 1 - (matches / total)
 
 print(f"\nSimple Matching Dissimilarity = {dissimilarity:.2f}")
+
+# -----------------------------
+# Part D: Numeric Attribute Dissimilarity
+# -----------------------------
+
+print("\n==============================")
+print("Part D: Numeric Attribute Dissimilarity")
+print("==============================")
+
+import math
+
+# Numeric attributes to compare
+numeric_cols = ["Age", "Fare"]
+
+# Remove missing values
+numeric_data = df[numeric_cols].dropna().reset_index(drop=True)
+
+# Select first two passengers
+p1 = numeric_data.iloc[0]
+p2 = numeric_data.iloc[1]
+
+print("\nPassenger 1")
+print(p1)
+
+print("\nPassenger 2")
+print(p2)
+
+# Calculate Euclidean Distance
+distance = math.sqrt(
+    (p1["Age"] - p2["Age"])**2 +
+    (p1["Fare"] - p2["Fare"])**2
+)
+
+print(f"\nEuclidean Distance = {distance:.2f}")
