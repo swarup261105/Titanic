@@ -67,3 +67,42 @@ print(numeric_attributes)
 
 print("\nBinary Attributes:")
 print(binary_attributes)
+
+# -----------------------------
+# Part C: Nominal Attribute Dissimilarity
+# -----------------------------
+
+print("\n==============================")
+print("Part C: Nominal Attribute Dissimilarity")
+print("==============================")
+
+# Nominal attributes to compare
+nominal_cols = ["Sex", "Embarked"]
+
+# Remove missing values
+nominal_data = df[nominal_cols].dropna().reset_index(drop=True)
+
+# Select first two passengers
+p1 = nominal_data.iloc[0]
+p2 = nominal_data.iloc[1]
+
+print("\nPassenger 1")
+print(p1)
+
+print("\nPassenger 2")
+print(p2)
+
+# Calculate Simple Matching Dissimilarity
+matches = 0
+total = len(nominal_cols)
+
+for col in nominal_cols:
+    if p1[col] == p2[col]:
+        print(f"{col}: Same")
+        matches += 1
+    else:
+        print(f"{col}: Different")
+
+dissimilarity = 1 - (matches / total)
+
+print(f"\nSimple Matching Dissimilarity = {dissimilarity:.2f}")
