@@ -1,9 +1,14 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import math
 
 # Read the dataset
 df = pd.read_csv("train.csv")
+
+print("=" * 50)
+print("PART A : EXPLORATORY DATA ANALYSIS (EDA)")
+print("=" * 50)
 
 # Display first 5 rows
 print("First 5 Rows")
@@ -24,6 +29,19 @@ print(df.isnull().sum())
 
 print("\nStatistical Summary:")
 print(df.describe())
+
+
+# Dataset Information
+print("\nDataset Information:")
+df.info()
+
+# Last 5 Rows
+print("\nLast 5 Rows:")
+print(df.tail())
+
+# Duplicate Rows
+print("\nDuplicate Rows:")
+print(df.duplicated().sum())
 
 # Survival Count
 plt.figure(figsize=(5,4))
@@ -51,9 +69,24 @@ plt.title("Fare Distribution")
 plt.xlabel("Fare")
 plt.show()
 
+# Correlation Heatmap
+plt.figure(figsize=(8,6))
+
+# Select only numeric columns
+numeric_df = df.select_dtypes(include='number')
+
+# Create heatmap
+sns.heatmap(numeric_df.corr(), annot=True, cmap="coolwarm")
+
+plt.title("Correlation Heatmap")
+plt.show()
+
 # -----------------------------
 # Part B: Identify Attributes
 # -----------------------------
+print("\n" + "=" * 50)
+print("PART B : IDENTIFY ATTRIBUTES")
+print("=" * 50)
 
 nominal_attributes = ["Name", "Sex", "Ticket", "Cabin", "Embarked"]
 numeric_attributes = ["PassengerId", "Pclass", "Age", "SibSp", "Parch", "Fare"]
@@ -71,10 +104,9 @@ print(binary_attributes)
 # -----------------------------
 # Part C: Nominal Attribute Dissimilarity
 # -----------------------------
-
-print("\n==============================")
-print("Part C: Nominal Attribute Dissimilarity")
-print("==============================")
+print("\n" + "=" * 50)
+print("PART C : NOMINAL ATTRIBUTE DISSIMILARITY")
+print("=" * 50)
 
 # Nominal attributes to compare
 nominal_cols = ["Sex", "Embarked"]
@@ -111,11 +143,9 @@ print(f"\nSimple Matching Dissimilarity = {dissimilarity:.2f}")
 # Part D: Numeric Attribute Dissimilarity
 # -----------------------------
 
-print("\n==============================")
-print("Part D: Numeric Attribute Dissimilarity")
-print("==============================")
-
-import math
+print("\n" + "=" * 50)
+print("PART D : NUMERIC ATTRIBUTE DISSIMILARITY")
+print("=" * 50)
 
 # Numeric attributes to compare
 numeric_cols = ["Age", "Fare"]
